@@ -4,32 +4,194 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      /* Container */
+.mainblock{
+  background-image:linear-gradient(to bottom,#aa86b1 , #bb6a90b7,rgb(153, 60, 133));
+}
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 45px;
+    background-image: linear-gradient(to bottom ,#c33764,#1d2671);  }
+  
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  /* Form */
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .form h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  /* Input Boxes */
+  .input-box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  
+
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  select {
+    cursor: pointer;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  /* Diabetes select box */
+  .diabetes-box {
+    margin-bottom: 20px;
+  }
+  
+  /* Allergy options */
+  .allergy-options {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .allergy {
+    margin-right: 20px;
+  }
+  
+  /* Gender radio group */
+  .radio-group {
+    display: flex;
+    margin-top: 5px;
+  }
+  
+  .radio-group label {
+    margin-right: 10px;
+  }
+  
+  /* Reason select box and other input */
+  #other-input {
+    margin-top: 10px;
+  }
+  
+  #other-reason {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: none;
+  }
+  
+  /* Submit button */
+  .button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 2px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin:auto;
+
+    width:25%;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Validation Error Messages */
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .alert{
+    width: 100%;
+    border-radius: 15px;
+    background: rgb(7, 124, 56);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    display: none;
+}
+  
+  /* Responsive design for smaller screens */
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+    .input-box {
+      width: 48%;
+    }
+  }
+
+    </style>
     <title>Registration Form in HTML CSS</title>
-    <link rel="stylesheet" href="styles.css"/>
   </head>
-  <body>
+  <body class="mainblock">
     <section class="container">
       <header><h1>Akatsuki Hospitals</h1></header>
-      <form action="#" class="form">
+      <form action="#"id="medvaultform" class="form">
+        <div class="alert">Response submitted</div>
         <h3>Patient Information</h3>
         <div class="column">
         <div class="input-box">
           <label>Full Name</label>
-          <input type="text" placeholder="Enter full name" required />
+          <input type="text" id="name" placeholder="Enter full name" required />
         </div>
 
         <div class="input-box">
           <label>Email Address</label>
-          <input type="text" placeholder="Enter email address" required />
+          <input type="text" id="email" placeholder="Enter email address" required />
         </div>
 
           <div class="input-box">
             <label>Phone Number</label>
-            <input type="number" placeholder="Enter phone number" required />
+            <input type="number" id="number" placeholder="Enter phone number" required />
           </div>
           <div class="input-box">
             <label>Birth Date</label>
-            <input type="date" placeholder="Enter birth date" required />
+            <input type="date" id="birthdate" placeholder="Enter birth date" required />
           </div>
           
           <div>
@@ -77,9 +239,9 @@
           <div class="gender">
             <label>Gender:</label>
             <div class="radio-group">
-              <label><input type="radio" name="gender" value="male"> Male</label>
-              <label><input type="radio" name="gender" value="female"> Female</label>
-              <label><input type="radio" name="gender" value="other"> Other</label>
+              <label><input type="radio" id="male" name="gender" value="male"> Male</label>
+              <label><input type="radio" id="female" name="gender" value="female"> Female</label>
+              <label><input type="radio" id="other" name="gender" value="other"> Other</label>
             </div>
           </div>
           <div class="input-box">
@@ -128,10 +290,10 @@
         
         <div class="input-box address">
           <label>Address</label>
-          <input type="text" placeholder="Enter street address" required />
-          <input type="text" placeholder="Enter street address line 2" required />
+          <input type="text" id="street1" placeholder="Enter street address" required />
+          <input type="text" id="street2" placeholder="Enter street address line 2" required />
             <div class="select-box">
-              <select>
+              <select id="country">
                 <option hidden>Country</option>
                 <option>America</option>
                 <option>Japan</option>
@@ -139,15 +301,104 @@
                 <option>Nepal</option>
               </select>
             </div>
-            <input type="text" placeholder="Enter your city" required />
-            <input type="text" placeholder="Enter your region" required />
-            <input type="number" placeholder="Enter postal code" required />
+            <input type="text" id="city" placeholder="Enter your city" required />
+            <input type="text" id="region" placeholder="Enter your region" required />
+            <input type="number" id="postalcode" placeholder="Enter postal code" required />
           </div>
         <div class="input-box button">
-          <input type="Submit" value="Submit">
+          <button class="button" type="submit">submit</button>
         </div>
         </div>
       <form></section>
-  </body>
-</html>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        
+        <script>
+ const firebaseConfig = {
+    apiKey: "AIzaSyA3qkq90Vsn1rDKJM6YA3CBLQrruxU8kFA",
+    authDomain: "medvault-1c694.firebaseapp.com",
+    databaseURL: "https://medvault-1c694-default-rtdb.firebaseio.com",
+    projectId: "medvault-1c694",
+    storageBucket: "medvault-1c694.appspot.com",
+    messagingSenderId: "904852095096",
+    appId: "1:904852095096:web:3ae34ea2aa2b8396496d8d",
+    measurementId: "G-6S2C2E0QMG"
+  };
 
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ //reference your database  
+var medvaultformDB=firebase.database().ref("Medvault-form");
+document.getElementById("medvaultform").addEventListener("submit",submitForm);
+function submitForm(e){
+    e.preventDefault();
+    var name=getelementval("name");
+    var emailid=getelementval("email");
+    var number=getelementval("number");
+    var birthdate=getelementval("birthdate");
+    var bloodgroup=getelementval("blood-group");
+    var diabetes=getelementval("diabetes");
+    var allergy=getelementval("check-penicillin");
+    var allergy=getelementval("check-sulfa");
+    var allergy=getelementval("check-shellfish");
+    var allergy=getelementval("check-peanuts");
+    var gender=getelementval("male");
+    var gender=getelementval("female");
+    var gender=getelementval("other");
+    var reason=getelementval("reason-select");
+    var emergencyname=getelementval("emergency-name");
+    var emergencynumber=getelementval("emergency-phone");
+    var emergencyrelation=getelementval("emergency-relationship");
+    var street1=getelementval("street1");
+    var street2=getelementval("street2");
+    var country=getelementval("country");
+    var city=getelementval("city");
+    var region=getelementval("region");
+    var postalcode=getelementval("postalcode");
+
+    savemessages(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode);
+    //enable alert
+    document.querySelector('.alert').style.display="block";
+    //remove the alert
+    setTimeout( () => {
+    document.querySelector('.alert').style.display="none";
+    },3000);
+    //   reset the form
+  document.getElementById("medvaultform").reset();
+
+    //console.log(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode)
+
+}
+
+const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode)=>{
+    var newform=medvaultformDB.push();
+    
+    newform.set({
+        name: name,
+        emailid: emailid,
+        number: number,
+        birthdate: birthdate,
+        bloodgroup: bloodgroup,
+        diabetes: diabetes,
+        allergy: allergy,
+        gender: gender,
+        reason: reason,
+        emergencyname: emergencyname,
+        emergencynumber: emergencynumber,
+        emergencyrelation: emergencyrelation,
+        street1: street1,
+        street2: street2,
+        country: country,
+        city: city,
+        region: region,
+        postalcode: postalcode,
+    })
+}
+
+const getelementval=(id)=>{
+    return document.getElementById(id).value;
+};
+
+        </script>
+   </body>
+</html>
