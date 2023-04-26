@@ -7,19 +7,25 @@
     <style>
       /* Container */
 .mainblock{
-    background: radial-gradient(circle at 74.2% 50.9%, rgb(14, 72, 222) 5.2%, rgb(3, 22, 6) 75.3%);
+  background: radial-gradient(circle at 74.2% 50.9%, rgb(14, 72, 222) 5.2%, rgb(3, 22, 65) 75.3%);
 }
+
 .container {
     margin: auto;
     width: 50%;
     padding: 45px;
-    background: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 26, 0.73) 80%);
-  }
+    background: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 216, 0.73) 80%);
   
+  }  
   /* Header */
   header {
     text-align: center;
     margin-bottom: 20px;
+  }
+  .date{
+    border-radius:7px ;
+    border:none;
+    font-weight: bold;
   }
   
   h1 {
@@ -48,7 +54,8 @@
   
   label {
     display: block;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 5px;
   }
   
@@ -171,7 +178,7 @@
   </head>
   <body class="mainblock">
     <section class="container">
-      <header><h1>MedVault</h1></header>
+      <header><h1>Akatsuki Hospitals</h1></header>
       <form action="#"id="medvaultform" class="form">
         <div class="alert">Response submitted</div>
         <h3>Patient Information</h3>
@@ -192,7 +199,7 @@
           </div>
           <div class="input-box">
             <label>Birth Date</label>
-            <input type="date" id="birthdate" placeholder="Enter birth date" required />
+            <input type="date" id="birthdate" class="date" placeholder="Enter birth date" required />
           </div>
           
           <div>
@@ -217,26 +224,18 @@
             </select>
           </div>
           <div class="input-box">
-            <label>Known Allergies</label>
-            <div class="allergy-options">
-              <div class="allergy">
-                <input type="checkbox" id="check-penicillin" name="penicillin" />
-                <label for="check-penicillin">Penicillin</label>
-              </div>
-              <div class="allergy">
-                <input type="checkbox" id="check-sulfa" name="sulfa" />
-                <label for="check-sulfa">Sulfa</label>
-              </div>
-              <div class="allergy">
-                <input type="checkbox" id="check-shellfish" name="shellfish" />
-                <label for="check-shellfish">Shellfish</label>
-              </div>
-              <div class="allergy">
-                <input type="checkbox" id="check-peanuts" name="peanuts" />
-                <label for="check-peanuts">Peanuts</label>
-              </div>
-            </div>
-          </div>
+          <label>Would you like to share your previous medical history :</label>
+          <label>
+            <input type="radio" name="yesnoRadio" id="yes" value="yes"> Yes
+          </label>
+          <label>
+            <input type="radio" name="yesnoRadio" id="yes" value="no"> No
+          </label>
+          <div id="inputBoxContainer" style="display: none;">
+            <input type="text" id="hospital-name" placeholder="Enter the name of the hospital visited before:">
+            <input type="text" id="medical-condition" placeholder="Enter prior medical conditions:">
+            <input type="text" id="medication" placeholder="Enter the medication given">
+          </div>          
           <div class="gender">
             <label>Gender:</label>
             <div class="radio-group">
@@ -271,6 +270,23 @@
               }
             }
           </script>
+          <div class="input-box address">
+            <label>Address</label>
+            <input type="text" id="doorno" placeholder="Enter House name,door number" required />
+            <input type="text" id="street" placeholder="Enter street name and area" required />
+              <input type="text" id="city" placeholder="Enter your city" required />
+              <input type="text" id="state" placeholder="Enter your state" required />
+              <input type="number" id="postalcode" placeholder="Enter postal code" required />
+              <div class="select-box">
+                <select id="country">
+                  <option hidden>Country</option>
+                  <option>America</option>
+                  <option>Japan</option>
+                  <option>India</option>
+                  <option>Nepal</option>
+                </select>
+              </div>
+            </div>
 
         <div class="emergency-contact">
           <h3>Emergency Contact Information</h3>
@@ -282,30 +298,11 @@
             <label for="emergency-phone">Phone Number</label>
             <input type="tel" id="emergency-phone" placeholder="Enter phone number" required>
           </div>
-
           <div class="input-box">
             <label for="emergency-relationship">Relationship</label>
             <input type="text" id="emergency-relationship" placeholder="Enter relationship" required>
           </div>
         </div>
-        
-        <div class="input-box address">
-          <label>Address</label>
-          <input type="text" id="street1" placeholder="Enter street address" required />
-          <input type="text" id="street2" placeholder="Enter street address line 2" required />
-            <div class="select-box">
-              <select id="country">
-                <option hidden>Country</option>
-                <option>America</option>
-                <option>Japan</option>
-                <option>India</option>
-                <option>Nepal</option>
-              </select>
-            </div>
-            <input type="text" id="city" placeholder="Enter your city" required />
-            <input type="text" id="region" placeholder="Enter your region" required />
-            <input type="number" id="postalcode" placeholder="Enter postal code" required />
-          </div>
         <div class="input-box button">
           <button class="button" type="submit">submit</button>
         </div>
@@ -314,6 +311,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
         
         <script>
+          const radioButtons = document.getElementsByName('yesnoRadio');
+          const inputBoxContainer = document.getElementById('inputBoxContainer');
+          radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+              if (radioButton.value === 'yes') {
+                inputBoxContainer.style.display = 'block';
+              } else {
+                inputBoxContainer.style.display = 'none';
+              }
+            });
+          });
  const firebaseConfig = {
     apiKey: "AIzaSyA3qkq90Vsn1rDKJM6YA3CBLQrruxU8kFA",
     authDomain: "medvault-1c694.firebaseapp.com",
@@ -339,10 +347,21 @@ function submitForm(e){
     var birthdate=getelementval("birthdate");
     var bloodgroup=getelementval("blood-group");
     var diabetes=getelementval("diabetes");
-    var allergy=getelementval("check-penicillin");
-    var allergy=getelementval("check-sulfa");
-    var allergy=getelementval("check-shellfish");
-    var allergy=getelementval("check-peanuts");
+    radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+              if (radioButton.value === 'yes') {
+                var medicalhistorypermission=getelementval("yes");
+      var hospitalname=getelementval("hospital-name");
+      var medicalcondition=getelementval("medical-condition");
+      var medication=getelementval("medication");
+              } else {
+                var medicalhistorypermission=getelementval("no");
+      var hospitalname="null";
+      var medicalcondition="null";
+      var medication="null";
+              }
+            });
+          });
     var gender=getelementval("male");
     var gender=getelementval("female");
     var gender=getelementval("other");
@@ -350,14 +369,16 @@ function submitForm(e){
     var emergencyname=getelementval("emergency-name");
     var emergencynumber=getelementval("emergency-phone");
     var emergencyrelation=getelementval("emergency-relationship");
-    var street1=getelementval("street1");
-    var street2=getelementval("street2");
+    var doorno=getelementval("doorno");
+    var street=getelementval("street");
     var country=getelementval("country");
     var city=getelementval("city");
-    var region=getelementval("region");
+    var state=getelementval("state");
     var postalcode=getelementval("postalcode");
 
-    savemessages(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode);
+    savemessages(name,emailid,number,birthdate,bloodgroup,diabetes,medicalhistorypermission,hospitalname,medicalcondition,medication,gender,
+    reason,doorno,street,city,state,postalcode,country,emergencyname,emergencynumber,
+    emergencyrelation);
     //enable alert
     document.querySelector('.alert').style.display="block";
     //remove the alert
@@ -366,12 +387,9 @@ function submitForm(e){
     },3000);
     //   reset the form
   document.getElementById("medvaultform").reset();
-
-    //console.log(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode)
-
 }
 
-const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,gender,reason,emergencyname,emergencynumber,emergencyrelation,street1,street2,country,city,region,postalcode)=>{
+const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,medicalhistorypermission,hospitalname,medicalcondition,gender,reason,emergencyname,emergencynumber,emergencyrelation,doorno,street,country,city,state,postalcode)=>{
     var newform=medvaultformDB.push();
     
     newform.set({
@@ -381,17 +399,20 @@ const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,allergy,ge
         birthdate: birthdate,
         bloodgroup: bloodgroup,
         diabetes: diabetes,
-        allergy: allergy,
+        medicalhistorypermission: medicalhistorypermission,
+        hospitalname: hospitalname,
+        medicalcondition: medicalcondition,
+        medication: medication,
         gender: gender,
         reason: reason,
         emergencyname: emergencyname,
         emergencynumber: emergencynumber,
         emergencyrelation: emergencyrelation,
-        street1: street1,
-        street2: street2,
+        doorno: doorno,
+        street: street,
         country: country,
         city: city,
-        region: region,
+        state: state,
         postalcode: postalcode,
     })
 }
@@ -401,5 +422,5 @@ const getelementval=(id)=>{
 };
 
         </script>
-   </body>
+   </body>
 </html>
