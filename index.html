@@ -83,22 +83,6 @@
   textarea {
     height: 100px;
   }
-  
-  /* Diabetes select box */
-  .diabetes-box {
-    margin-bottom: 20px;
-  }
-  
-  /* Allergy options */
-  .allergy-options {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .allergy {
-    margin-right: 20px;
-  }
-  
   /* Gender radio group */
   .radio-group {
     display: flex;
@@ -178,7 +162,7 @@
   </head>
   <body class="mainblock">
     <section class="container">
-      <header><h1>MEDVAULT</h1></header>
+      <header><h1>MEDVAULT</header>
       <form action="#"id="medvaultform" class="form">
         <div class="alert">Response submitted</div>
         <h3>Patient Information</h3>
@@ -216,20 +200,14 @@
               <option value="O-">O-</option>
             </select>
           </div>
-          <div class="diabetes-box">
-            <label for="diabetes">Do you have Diabetes?</label>
-            <select id="diabetes" name="diabetes">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
+
           <div class="input-box">
           <label>Would you like to share your previous medical history :</label>
           <label>
             <input type="radio" name="yesnoRadio" id="yes" value="yes"> Yes
           </label>
           <label>
-            <input type="radio" name="yesnoRadio" id="yes" value="no"> No
+            <input type="radio" name="yesnoRadio" id="no" value="no"> No
           </label>
           <div id="inputBoxContainer" style="display: none;">
             <input type="text" id="hospital-name" placeholder="Enter the name of the hospital visited before:">
@@ -308,10 +286,8 @@
         </div>
         </div>
       <form></section>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-        
         <script>
-          const radioButtons = document.getElementsByName('yesnoRadio');
+        const radioButtons = document.getElementsByName('yesnoRadio');
           const inputBoxContainer = document.getElementById('inputBoxContainer');
           radioButtons.forEach(function(radioButton) {
             radioButton.addEventListener('change', function() {
@@ -322,6 +298,10 @@
               }
             });
           });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        
+      <script>
  const firebaseConfig = {
     apiKey: "AIzaSyA3qkq90Vsn1rDKJM6YA3CBLQrruxU8kFA",
     authDomain: "medvault-1c694.firebaseapp.com",
@@ -346,39 +326,26 @@ function submitForm(e){
     var number=getelementval("number");
     var birthdate=getelementval("birthdate");
     var bloodgroup=getelementval("blood-group");
-    var diabetes=getelementval("diabetes");
-    radioButtons.forEach(function(radioButton) {
-            radioButton.addEventListener('change', function() {
-              if (radioButton.value === 'yes') {
-                var medicalhistorypermission=getelementval("yes");
-      var hospitalname=getelementval("hospital-name");
-      var medicalcondition=getelementval("medical-condition");
-      var medication=getelementval("medication");
-              } else {
-                var medicalhistorypermission=getelementval("no");
-      var hospitalname="null";
-      var medicalcondition="null";
-      var medication="null";
-              }
-            });
-          });
+    var hospitalname=getelementval("hospital-name");
+    var medicalhistorypermission=getelementval("yes");
+    var medicalhistorypermission=getelementval("no  ");
+    var medicalcondition=getelementval("medical-condition");
+    var medication=getelementval("medication");
     var gender=getelementval("male");
     var gender=getelementval("female");
     var gender=getelementval("other");
     var reason=getelementval("reason-select");
-    var emergencyname=getelementval("emergency-name");
-    var emergencynumber=getelementval("emergency-phone");
-    var emergencyrelation=getelementval("emergency-relationship");
     var doorno=getelementval("doorno");
     var street=getelementval("street");
-    var country=getelementval("country");
     var city=getelementval("city");
     var state=getelementval("state");
     var postalcode=getelementval("postalcode");
+    var country=getelementval("country");
+    var emergencyname=getelementval("emergency-name");
+    var emergencynumber=getelementval("emergency-phone");
+    var emergencyrelation=getelementval("emergency-relationship");
 
-    savemessages(name,emailid,number,birthdate,bloodgroup,diabetes,medicalhistorypermission,hospitalname,medicalcondition,medication,gender,
-    reason,doorno,street,city,state,postalcode,country,emergencyname,emergencynumber,
-    emergencyrelation);
+    savemessages(name,emailid,number,birthdate,bloodgroup,medicalhistorypermission,hospitalname,medicalcondition,medication,gender,reason,doorno,street,city,state,postalcode,country,emergencyname,emergencynumber,emergencyrelation);
     //enable alert
     document.querySelector('.alert').style.display="block";
     //remove the alert
@@ -389,7 +356,7 @@ function submitForm(e){
   document.getElementById("medvaultform").reset();
 }
 
-const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,medicalhistorypermission,hospitalname,medicalcondition,gender,reason,emergencyname,emergencynumber,emergencyrelation,doorno,street,country,city,state,postalcode)=>{
+const savemessages=(name,emailid,number,birthdate,bloodgroup,medicalhistorypermission,hospitalname,medicalcondition,medication,gender,reason,doorno,street,city,state,postalcode,country,emergencyname,emergencynumber,emergencyrelation)=>{
     var newform=medvaultformDB.push();
     
     newform.set({
@@ -398,22 +365,22 @@ const savemessages=(name,emailid,number,birthdate,bloodgroup,diabetes,medicalhis
         number: number,
         birthdate: birthdate,
         bloodgroup: bloodgroup,
-        diabetes: diabetes,
         medicalhistorypermission: medicalhistorypermission,
         hospitalname: hospitalname,
         medicalcondition: medicalcondition,
         medication: medication,
         gender: gender,
         reason: reason,
-        emergencyname: emergencyname,
-        emergencynumber: emergencynumber,
-        emergencyrelation: emergencyrelation,
         doorno: doorno,
         street: street,
-        country: country,
         city: city,
         state: state,
         postalcode: postalcode,
+        country: country,
+        emergencyname: emergencyname,
+        emergencynumber: emergencynumber,
+        emergencyrelation: emergencyrelation,
+        
     })
 }
 
